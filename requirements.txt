@@ -1,2 +1,4 @@
 redis
 hiredis
+sqlite3
+BeautifulSoup
