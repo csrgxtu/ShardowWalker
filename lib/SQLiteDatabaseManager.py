@@ -218,6 +218,45 @@ class SQLiteDatabaseManager(object):
       return res
     #pass
 
+  # retrieveDeadLinks
+  # retrieve records from deadLinks with delete operation
+  #
+  # @param start int
+  # @param offset int
+  # @return urls list(string) or False
+  def retrieveDeadLinks(self, start, offset):
+    urls = self.readDeadLinks(start, offset)
+    if urls != False:
+      self.deleteDeadLinks(urls)
+    return urls
+    #pass
+
+  # retrieveUnvisitedLinks
+  # retrieve records from unvisitedLinks with delete operation
+  #
+  # @param start int
+  # @param offset int
+  # @return urls list(string) or False
+  def retrieveUnvisitedLinks(self, start, offset):
+    urls = self.readUnvisitedLinks(start, offset)
+    if urls != False:
+      self.deleteUnvisitedLinks(urls)
+    return urls
+    #pass
+
+  # retrieveVisitedLinks
+  # retrieve records from visitedLinks with delte operation
+  #
+  # @param start int
+  # @param offset int
+  # @return urls list(string) or False
+  def retrieveVisitedLinks(self, start, offset):
+    urls = self.readVisitedLinks(start, offset)
+    if urls != False:
+      self.deleteVisitedLinks(urls)
+    return urls
+    #pass
+
   # updateDeadLink
   # update a record in deadLinks
   #
@@ -275,7 +314,7 @@ class SQLiteDatabaseManager(object):
   # @param url string
   # @return boolean
   def deleteDeadLink(self, url):
-    sql = "DELETE FROM deadLinks WHERE url = '" + url
+    sql = "DELETE FROM deadLinks WHERE url = '" + url + "'"
     self.cursor.execute(sql)
     return True
     #pass
@@ -307,7 +346,7 @@ class SQLiteDatabaseManager(object):
   # @param url string
   # @return boolean
   def deleteUnvisiteLink(self, url):
-    sql = "DELETE FROM unvistedLinks WHERE url = '" + url
+    sql = "DELETE FROM unvistedLinks WHERE url = '" + url + "'"
     self.cursor.execute(sql)
     return True
     #pass
@@ -339,7 +378,7 @@ class SQLiteDatabaseManager(object):
   # @param url string
   # @return boolean
   def deleteVisitedLink(self, url):
-    sql = "DELETE FROM vistedLinks WHERE url = '" + url
+    sql = "DELETE FROM vistedLinks WHERE url = '" + url + "'"
     self.cursor.execute(sql)
     return True
     #pass
