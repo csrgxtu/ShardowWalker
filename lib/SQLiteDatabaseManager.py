@@ -333,8 +333,11 @@ class SQLiteDatabaseManager(object):
   # @return boolean
   def deleteDeadLink(self, url):
     sql = "DELETE FROM deadLinks WHERE url = '" + url + "'"
-    self.cursor.execute(sql)
-    return True
+    try:
+      self.cursor.execute(sql)
+      return True
+    except:
+      return False
     #pass
   
   # deleteDeadLinks
@@ -344,7 +347,8 @@ class SQLiteDatabaseManager(object):
   # @return boolean
   def deleteDeadLinks(self, urls):
     for url in urls:
-      self.deleteDeadLink(url)
+      if not self.deleteDeadLink(url):
+        return False
     return True
     #pass
   
@@ -354,8 +358,11 @@ class SQLiteDatabaseManager(object):
   # @return boolean
   def deleteAllDeadLinks(self):
     sql = "DELETE FROM deadLinks"
-    self.cursor.execute(sql)
-    return True
+    try:
+      self.cursor.execute(sql)
+      return True
+    except:
+      return False
     #pass
 
   # deleteUnvisitedLink
@@ -365,8 +372,11 @@ class SQLiteDatabaseManager(object):
   # @return boolean
   def deleteUnvisitedLink(self, url):
     sql = "DELETE FROM unvisitedLinks WHERE url = '" + url + "'"
-    self.cursor.execute(sql)
-    return True
+    try:
+      self.cursor.execute(sql)
+      return True
+    except:
+      return False
     #pass
 
   # deleteUnvisitedLinks
@@ -376,7 +386,8 @@ class SQLiteDatabaseManager(object):
   # @return boolean
   def deleteUnvisitedLinks(self, urls):
     for url in urls:
-      self.deleteUnvisitedLink(url)
+      if not self.deleteUnvisitedLink(url):
+        return False
     return True
     #pass
 
@@ -386,8 +397,11 @@ class SQLiteDatabaseManager(object):
   # @return boolean
   def deleteAllUnvisitedLinks(self):
     sql = "DELETE FROM unvisitedLinks"
-    self.cursor.execute(sql)
-    return True
+    try:
+      self.cursor.execute(sql)
+      return True
+    except:
+      return False
     #pass
   
   # deleteVisitedLink
@@ -397,8 +411,11 @@ class SQLiteDatabaseManager(object):
   # @return boolean
   def deleteVisitedLink(self, url):
     sql = "DELETE FROM vistedLinks WHERE url = '" + url + "'"
-    self.cursor.execute(sql)
-    return True
+    try:
+      self.cursor.execute(sql)
+      return True
+    except:
+      return False
     #pass
 
   # deleteVisitedLinks
@@ -408,7 +425,8 @@ class SQLiteDatabaseManager(object):
   # @return boolean
   def deleteVisitedLinks(self, urls):
     for url in urls:
-      self.deleteVisitedLink(url)
+      if not self.deleteVisitedLink(url):
+        return False
     return True
     #pass
 
@@ -418,8 +436,11 @@ class SQLiteDatabaseManager(object):
   # @return boolean
   def deleteAllVisitedLinks(self):
     sql = "DELETE FROM visitedLinks"
-    self.cursor.execute(sql)
-    return True
+    try:
+      self.cursor.execute(sql)
+      return True
+    except:
+      return False
     #pass
 
   # isInDeadLink

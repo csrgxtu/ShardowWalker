@@ -15,9 +15,11 @@ from Utility import loadLstFromFile
 from Download import Download
 from SQLiteDatabaseManager import SQLiteDatabaseManager
 from URLExtractor import URLExtractor
+from NonPlainFileFilter import NonPlainFileFilter
 
 class ShadowWalker(object):
   dbm = False
+  urlFilter = False
 
   # intialization database, load seed to unvisitedLinks table
   #
@@ -28,6 +30,8 @@ class ShadowWalker(object):
 
     urls = loadLstFromFile(seedFile)
     self.dbm.createUnvisitedLinks(urls)
+
+    self.urlFilter = NonPlainFileFilter()
   
   # walker
   # start actually walker
@@ -36,12 +40,15 @@ class ShadowWalker(object):
   def walker(self):
     while True:
       urls = self.dbm.retrieveUnvisitedLinks(0, 100)
+      urls = self.urlFilter.getFilteredUrls(urls)
+      if len(urls) == 0:
+        break
 
       for url in urls:
         print 'INFO: Processing ', url
         d = Download(url)
         if d.doRequest() == 1:
-          self.dbm.createDeadLink(url)
+          self.dbm.createDeadLink(url):
         else:
           self.dbm.createVisitedLink(url)
           u = URLExtractor(d.getSOURCE(), url)

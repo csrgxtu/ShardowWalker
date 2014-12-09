@@ -17,7 +17,10 @@ class URLExtractor(object):
   #
   # @param html
   def __init__(self, html, baseUrl):
-    self.soup = BeautifulSoup(html)
+    try:
+      self.soup = BeautifulSoup(html)
+    except:
+      self.soup = False
     self.baseUrl = baseUrl
   
   # getUrls
@@ -25,6 +28,9 @@ class URLExtractor(object):
   #
   # @return urls list(string) or False
   def getUrls(self):
+    if self.soup == False:
+      return False
+
     urls = []
 
     for a in self.soup.findAll('a', href=True):
