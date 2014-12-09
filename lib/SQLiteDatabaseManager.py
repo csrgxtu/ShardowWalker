@@ -48,8 +48,11 @@ class SQLiteDatabaseManager(object):
   # @return boolean
   def createDeadLink(self, url):
     sql = "INSERT INTO deadLinks(url) VALUES(:url)"
-    self.cursor.execute(sql, {"url": url})
-    return True
+    try:
+      self.cursor.execute(sql, {"url": url})
+      return True
+    except:
+      return False
     #pass
 
   # createDeadLinks
@@ -60,9 +63,12 @@ class SQLiteDatabaseManager(object):
   def createDeadLinks(self, urls):
     urls = [tuple([x]) for x in urls]
     sql = "INSERT INTO deadLinks(url) VALUES(:url)"
-    self.cursor.executemany(sql, urls)
-    self.db.commit()
-    return True
+    try:
+      self.cursor.executemany(sql, urls)
+      self.db.commit()
+      return True
+    except:
+      return False
     #pass
 
   # createUnvisitedLink
@@ -72,8 +78,11 @@ class SQLiteDatabaseManager(object):
   # @return boolean
   def createUnvisitedLink(self, url):
     sql = "INSERT INTO unvisitedLinks(url) VALUES(:url)"
-    self.cursor.execute(sql, {"url": url})
-    return True
+    try:
+      self.cursor.execute(sql, {"url": url})
+      return True
+    except:
+      return False
     #pass
 
   # createUnvisitedLinks
@@ -84,9 +93,12 @@ class SQLiteDatabaseManager(object):
   def createUnvisitedLinks(self, urls):
     urls = [tuple([x]) for x in urls]
     sql = "INSERT INTO unvisitedLinks(url) VALUES(:url)"
-    self.cursor.executemany(sql, urls)
-    self.db.commit()
-    return True
+    try:
+      self.cursor.executemany(sql, urls)
+      self.db.commit()
+      return True
+    except:
+      return False
     #pass
 
   # createVisitedLink
@@ -96,8 +108,11 @@ class SQLiteDatabaseManager(object):
   # @return boolean
   def createVisitedLink(self, url):
     sql = "INSERT INTO visitedLinks(url) VALUES(:url)"
-    self.cursor.execute(sql, {"url": url})
-    return True
+    try:
+      self.cursor.execute(sql, {"url": url})
+      return True
+    except:
+      return False
     #pass
 
   # createVisitedLinks
@@ -108,9 +123,12 @@ class SQLiteDatabaseManager(object):
   def createVisitedLinks(self, urls):
     urls = [tuple([x]) for x in urls]
     sql = "INSERT INTO visitedLinks(url) VALUES(:url)"
-    self.cursor.executemany(sql, urls)
-    self.db.commit()
-    return True
+    try:
+      self.cursor.executemany(sql, urls)
+      self.db.commit()
+      return True
+    except:
+      return False
     #pass
 
   # readDeadLink
@@ -345,8 +363,8 @@ class SQLiteDatabaseManager(object):
   #
   # @param url string
   # @return boolean
-  def deleteUnvisiteLink(self, url):
-    sql = "DELETE FROM unvistedLinks WHERE url = '" + url + "'"
+  def deleteUnvisitedLink(self, url):
+    sql = "DELETE FROM unvisitedLinks WHERE url = '" + url + "'"
     self.cursor.execute(sql)
     return True
     #pass
