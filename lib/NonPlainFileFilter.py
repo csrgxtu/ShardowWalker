@@ -46,7 +46,7 @@ class NonPlainFileFilter(object):
                         '.lua', '.m', '.sh', '.sln',
                         '.swift', '.vcxproj', '.xcodeproj', '.bak',
                         '.tmp', '.crdownload', '.ics', '.msi', '.part',
-                        '.torrent']
+                        '.torrent', '.rmvb']
   # getFilteredUrls
   # get the filtered urls
   #

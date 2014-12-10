@@ -20,3 +20,13 @@ def loadLstFromFile(inputFile):
       res.append(line.rstrip())
 
   return res
+
+# str2file
+# save string to file
+#
+# @param string
+# @param outputFile
+# @return void
+def str2file(string, outputFile):
+  with open(outputFile, 'w') as FH:
+    FH.write(string + '\n')

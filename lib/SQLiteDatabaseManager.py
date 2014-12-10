@@ -236,6 +236,16 @@ class SQLiteDatabaseManager(object):
       return res
     #pass
 
+  # retrieveDeadLink
+  # retrieve a record from deadLinks with delete operation
+  #
+  # @return url string or False
+  def retrieveDeadLink(self):
+    url = self.readDeadLink()
+    if url != False:
+      self.deleteDeadLink(url)
+    return url
+
   # retrieveDeadLinks
   # retrieve records from deadLinks with delete operation
   #
@@ -249,6 +259,16 @@ class SQLiteDatabaseManager(object):
     return urls
     #pass
 
+  # retrieveUnvisitedLink
+  # retrieve a record from unvisitedLink with delete operation
+  #
+  # @return url string or False
+  def retrieveUnvisitedLink(self):
+    url = self.readUnvisitedLink()
+    if url != False:
+      self.deleteUnvisitedLink(url)
+    return url
+
   # retrieveUnvisitedLinks
   # retrieve records from unvisitedLinks with delete operation
   #
@@ -261,6 +281,16 @@ class SQLiteDatabaseManager(object):
       self.deleteUnvisitedLinks(urls)
     return urls
     #pass
+
+  # retrieveVisitedLink
+  # retrieve a record from visitedLinks with delete operation
+  #
+  # @return url string or False
+  def retrieveVisitedLink(self):
+    url = self.readVisitedLink()
+    if url != False:
+      self.deleteVisitedLink(url)
+    return url
 
   # retrieveVisitedLinks
   # retrieve records from visitedLinks with delte operation
@@ -450,7 +480,10 @@ class SQLiteDatabaseManager(object):
   # @return boolean
   def isInDeadLink(self, url):
     sql = "SELECT url FROM deadLinks WHERE url = '" + url + "'"
-    self.cursor.execute(sql)
+    try:
+      self.cursor.execute(sql)
+    except:
+      return True
     allRows = self.cursor.fetchall()
     if len(allRows) == 0:
       return False
@@ -465,7 +498,10 @@ class SQLiteDatabaseManager(object):
   # @return boolean
   def isInUnvisitedLink(self, url):
     sql = "SELECT url FROM unvisitedLinks WHERE url = '" + url + "'"
-    self.cursor.execute(sql)
+    try:
+      self.cursor.execute(sql)
+    except:
+      return True
     allRows = self.cursor.fetchall()
     if len(allRows) == 0:
       return False
@@ -480,10 +516,38 @@ class SQLiteDatabaseManager(object):
   # @return boolean
   def isInVisitedLink(self, url):
     sql = "SELECT url FROM visitedLinks WHERE url = '" + url + "'"
-    self.cursor.execute(sql)
+    try:
+      self.cursor.execute(sql)
+    except:
+      return True
     allRows = self.cursor.fetchall()
     if len(allRows) == 0:
       return False
     else:
       return True
     #pass
+  
+  # getStats
+  # get the stats of the three table, i.e. rows number
+  #
+  # @return res list(int) or False
+  def getStats(self):
+    res = []
+
+    sql = "SELECT COUNT(url) AS count FROM deadLinks"
+    sqla = "SELECT COUNT(url) AS count FROM unvisitedLinks"
+    sqlb = "SELECT COUNT(url) AS count FROM visitedLinks"
+
+    self.cursor.execute(sql)
+    allRows = self.cursor.fetchall()
+    res.append(allRows[0][0])
+
+    self.cursor.execute(sqla)
+    allRows = self.cursor.fetchall()
+    res.append(allRows[0][0])
+
+    self.cursor.execute(sqlb)
+    allRows = self.cursor.fetchall()
+    res.append(allRows[0][0])
+
+    return res

@@ -12,4 +12,4 @@ db = 'ShadowWalker'
 seedFile = '../data/seeds.txt'
 
 sd = ShadowWalker(db, seedFile)
-sd.walker()
+sd.run()

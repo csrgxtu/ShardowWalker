@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Sails.js | Realtime MVC Framework for Node.js</title>
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link href='/styles/fonts.css' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600' rel='stylesheet' type='text/css'>
+    <meta name="description" content="Sails.js makes it easy to build custom, enterprise-grade Node.js apps. It is designed to resemble the MVC architecture from frameworks like Ruby on Rails, but with support for the more modern, data-oriented style of web app development. It's especially good for building realtime features like chat." />
+    <meta name="author" content="Mike McNeil, Balderdash, and contributors" />
+
+    <!-- Usher the robots into my chamber -->
+    <meta name="robots" content="ALL"/>
+    <meta name="googlebot" content="index,follow"/>
+    <meta name="fragment" content="!"/>
+
+    <!--STYLES-->
+    <link rel="stylesheet" href="/min/production.css">
+    <!--STYLES END-->
+
+    <!--[if lt IE 9]>
+      <link rel="stylesheet" href="css/ie8.css">
+    <![endif]-->
+  </head>
+  <body
+    ng-app="Sails"
+    ng-controller="AppCtrl">
+
+    <div class="topbar-wrapper" ng-include="'templates/pages/Reusable/Header/Topbar.html'"></div>
+    <div class="wrap">
+      <div ng-view></div>
+      <div id="push"></div>
+    </div>
+    <div ng-include="'templates/pages/Reusable/Footer/SharingFooter.html'"></div>
+
+    <!--TEMPLATES-->
+    <script type="text/javascript" src="/jst.js"></script>
+    <!--TEMPLATES END-->
+
+
+    <!--SCRIPTS-->
+    <script src="/min/production.js"></script>
+    <!--SCRIPTS END-->
+
+    <!-- Tweet button script -->
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+    </script>
+
+    <!-- Follow button script -->
+    <!--
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    -->
+  </body>
+
+
+</html>
+
